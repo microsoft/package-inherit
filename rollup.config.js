@@ -7,15 +7,14 @@ import progress from "rollup-plugin-progress";
 export default {
   input: "src/index.ts",
   output: {
-    dir: "dist",
     format: "cjs",
+    file: "dist/package-inherit.js"
   },
   plugins: [
     typescript(),
     nodeExternals(),
-    ...(process.env.NODE_ENV === "production" ? [nodeResolve()] : []),
-
+    nodeResolve(),
     commonjs(),
     progress(),
-  ],
+  ]
 };

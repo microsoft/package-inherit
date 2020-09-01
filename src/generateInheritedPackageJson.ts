@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { getPackageInfos, PackageInfos } from "workspace-tools";
+import { getPackageInfos } from "workspace-tools/lib/getPackageInfos";
+import { PackageInfos } from "workspace-tools/lib/types/PackageInfo";
 import { InheritsInfo } from "./InheritsInfo";
 import parsePackageName from "parse-package-name";
 

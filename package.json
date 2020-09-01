@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "release": "yarn build && yarn publish"
   },
   "dependencies": {
     "workspace-tools": "^0.9.4",

@@ -49,6 +49,9 @@ Please run the following command:
     console.log(`
 Usage: package-inherit [command] [--recovery]
 
+This utility will update package.json in a monorepo to inherit from another package.json template.
+Currently, only "scripts", "devDependencies", and "dependencies" are merged into the package.json
+
 Commands:
 
   update      updates the package.json for all packages in a monorepo to match inheritance
