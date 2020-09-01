@@ -4,7 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import nodeExternals from "rollup-plugin-node-externals";
 import progress from "rollup-plugin-progress";
 
-export default {
+export default [{
   input: "src/index.ts",
   output: {
     format: "cjs",
@@ -17,4 +17,17 @@ export default {
     commonjs(),
     progress(),
   ]
-};
+}, {
+  input: "src/cli.ts",
+  output: {
+    format: "cjs",
+    file: "dist/cli.js"
+  },
+  plugins: [
+    typescript(),
+    nodeExternals(),
+    nodeResolve(),
+    commonjs(),
+    progress(),
+  ]
+}];
