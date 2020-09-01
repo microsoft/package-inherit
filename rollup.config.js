@@ -12,7 +12,7 @@ export default [{
     banner: "// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit.js"
   },
   plugins: [
-    typescript(),
+    typescript({ isolatedModules: true }),
     nodeExternals(),
     nodeResolve(),
     commonjs(),
@@ -26,7 +26,7 @@ export default [{
     banner: "// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit-cli.js"
   },
   plugins: [
-    typescript(),
+    typescript({ isolatedModules: true }),
     nodeExternals(),
     nodeResolve(),
     commonjs(),

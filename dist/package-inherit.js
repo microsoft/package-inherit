@@ -35471,6 +35471,7 @@ var C__workspace_packageInherit_node_modules_parsePackageName = function (input)
 function generateInheritedPackageJson(cwd) {
     const allPackages = getPackageInfos_1.getPackageInfos(cwd);
     const modifiedPackages = [];
+    const keys = ["devDependencies", "dependencies", "scripts"];
     for (const [pkg, info] of Object.entries(allPackages)) {
         // workspace-tools typings are not comprehensive about what is possible, so we force cast it
         if (info.inherits) {
@@ -35481,7 +35482,6 @@ function generateInheritedPackageJson(cwd) {
                     throw new Error(`${file} does not exist`);
                 }
                 const inheritInfo = JSON.parse(fs__default['default'].readFileSync(file, "utf-8"));
-                const keys = ["devDependencies", "dependencies", "scripts"];
                 for (const key of keys) {
                     if (shouldUpdate(info[key], inheritInfo[key])) {
                         info[key] = { ...info[key], ...inheritInfo[key] };
@@ -35504,11 +35504,12 @@ function resolveInRepo(pkg, specifier, allPackages) {
     }
 }
 function shouldUpdate(mine, theirs) {
-    if (!mine || !theirs) {
+    if (!theirs) {
         return false;
     }
     let result = false;
     for (const [key, value] of Object.entries(theirs)) {
+        console.log(`${mine[key]} vs ${value}`);
         if (mine[key] !== value) {
             result = true;
         }

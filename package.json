@@ -1,7 +1,7 @@
 {
   "name": "package-inherit",
   "version": "0.1.0",
-  "main": "dist/cli.js",
+  "main": "dist/package-inherit-cli.js",
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",

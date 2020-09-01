@@ -8,6 +8,7 @@ import parsePackageName from "parse-package-name";
 export function generateInheritedPackageJson(cwd: string) {
   const allPackages = getPackageInfos(cwd);
   const modifiedPackages: string[] = [];
+  const keys = ["devDependencies", "dependencies", "scripts"];
 
   for (const [pkg, info] of Object.entries(allPackages)) {
     // workspace-tools typings are not comprehensive about what is possible, so we force cast it
@@ -21,8 +22,6 @@ export function generateInheritedPackageJson(cwd: string) {
         }
 
         const inheritInfo = JSON.parse(fs.readFileSync(file, "utf-8"));
-
-        const keys = ["devDependencies", "dependencies", "scripts"];
 
         for (const key of keys) {
           if (shouldUpdate(info[key], inheritInfo[key])) {
@@ -56,13 +55,14 @@ function resolveInRepo(
 }
 
 function shouldUpdate(mine: any, theirs: any) {
-  if (!mine || !theirs) {
+  if (!theirs) {
     return false;
   }
 
   let result = false;
 
   for (const [key, value] of Object.entries(theirs)) {
+    console.log(`${mine[key]} vs ${value}`)
     if (mine[key] !== value) {
       result = true;
     }
