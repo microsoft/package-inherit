@@ -1,3 +1,4 @@
+// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit.js
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });

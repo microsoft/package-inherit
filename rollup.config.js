@@ -8,7 +8,8 @@ export default [{
   input: "src/index.ts",
   output: {
     format: "cjs",
-    file: "dist/package-inherit.js"
+    file: "dist/package-inherit.js",
+    banner: "// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit.js"
   },
   plugins: [
     typescript(),
@@ -21,7 +22,8 @@ export default [{
   input: "src/cli.ts",
   output: {
     format: "cjs",
-    file: "dist/cli.js"
+    file: "dist/package-inherit-cli.js",
+    banner: "// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit-cli.js"
   },
   plugins: [
     typescript(),

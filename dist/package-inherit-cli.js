@@ -1,3 +1,4 @@
+// This is generated and hosted here: https://github.com/microsoft/package-inherit/blob/main/dist/package-inherit-cli.js
 'use strict';
 
 var util$2 = require('util');
