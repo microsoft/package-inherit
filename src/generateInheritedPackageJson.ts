@@ -62,7 +62,6 @@ function shouldUpdate(mine: any, theirs: any) {
   let result = false;
 
   for (const [key, value] of Object.entries(theirs)) {
-    console.log(`${mine[key]} vs ${value}`)
     if (mine[key] !== value) {
       result = true;
     }

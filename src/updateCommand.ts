@@ -1,5 +1,7 @@
 
 import fs from 'fs';
+import os from 'os';
+import detectNewline from 'detect-newline';
 import { generateInheritedPackageJson } from "./generateInheritedPackageJson";
 
 export function updateCommand(cwd: string) {
@@ -7,9 +9,12 @@ export function updateCommand(cwd: string) {
   if (updatedInfo.modifiedPackages.length > 0) {
     for (const [pkg, info] of Object.entries(updatedInfo.allPackages)) {
       const { packageJsonPath, ...output } = info;
+
+      const newLine = detectNewline(fs.readFileSync(info.packageJsonPath, 'utf-8')) || os.EOL;
+
       fs.writeFileSync(
         info.packageJsonPath,
-        JSON.stringify(output, null, 2) + "\n"
+        JSON.stringify(output, null, 2).replace(/\n/g, newLine) + newLine
       );
     }
     console.log(

@@ -4,10 +4,10 @@
 var util$2 = require('util');
 var fs$3 = require('fs');
 var path = require('path');
+var os = require('os');
 var constants$3 = require('constants');
 var stream_1 = require('stream');
 var assert = require('assert');
-var os = require('os');
 var events_1 = require('events');
 var tty = require('tty');
 var require$$2 = require('net');
@@ -18,10 +18,10 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var util__default = /*#__PURE__*/_interopDefaultLegacy(util$2);
 var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs$3);
 var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
+var os__default = /*#__PURE__*/_interopDefaultLegacy(os);
 var constants__default = /*#__PURE__*/_interopDefaultLegacy(constants$3);
 var stream_1__default = /*#__PURE__*/_interopDefaultLegacy(stream_1);
 var assert__default = /*#__PURE__*/_interopDefaultLegacy(assert);
-var os__default = /*#__PURE__*/_interopDefaultLegacy(os);
 var events_1__default = /*#__PURE__*/_interopDefaultLegacy(events_1);
 var tty__default = /*#__PURE__*/_interopDefaultLegacy(tty);
 var require$$2__default = /*#__PURE__*/_interopDefaultLegacy(require$$2);
@@ -1175,6 +1175,27 @@ yargsParser.detailed = function (args, opts) {
 };
 yargsParser.camelCase = camelCase;
 yargsParser.decamelize = decamelize;
+
+const detectNewline = string => {
+	if (typeof string !== 'string') {
+		throw new TypeError('Expected a string');
+	}
+
+	const newlines = string.match(/(?:\r?\n)/g) || [];
+
+	if (newlines.length === 0) {
+		return;
+	}
+
+	const crlf = newlines.filter(newline => newline === '\r\n').length;
+	const lf = newlines.length - crlf;
+
+	return crlf > lf ? '\r\n' : '\n';
+};
+
+var detectNewline_1 = detectNewline;
+var graceful = string => (typeof string === 'string' && detectNewline(string)) || '\n';
+detectNewline_1.graceful = graceful;
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -36656,7 +36677,6 @@ function shouldUpdate(mine, theirs) {
     }
     let result = false;
     for (const [key, value] of Object.entries(theirs)) {
-        console.log(`${mine[key]} vs ${value}`);
         if (mine[key] !== value) {
             result = true;
         }
@@ -36669,7 +36689,8 @@ function updateCommand(cwd) {
     if (updatedInfo.modifiedPackages.length > 0) {
         for (const [pkg, info] of Object.entries(updatedInfo.allPackages)) {
             const { packageJsonPath, ...output } = info;
-            fs__default['default'].writeFileSync(info.packageJsonPath, JSON.stringify(output, null, 2) + "\n");
+            const newLine = detectNewline_1(fs__default['default'].readFileSync(info.packageJsonPath, 'utf-8')) || os__default['default'].EOL;
+            fs__default['default'].writeFileSync(info.packageJsonPath, JSON.stringify(output, null, 2).replace(/\n/g, newLine) + newLine);
         }
         console.log(`Updated these packages: ${updatedInfo.modifiedPackages.join(", ")}`);
     }
