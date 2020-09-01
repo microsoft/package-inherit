@@ -36687,7 +36687,8 @@ function shouldUpdate(mine, theirs) {
 function updateCommand(cwd) {
     const updatedInfo = generateInheritedPackageJson(cwd);
     if (updatedInfo.modifiedPackages.length > 0) {
-        for (const [pkg, info] of Object.entries(updatedInfo.allPackages)) {
+        for (const pkg of updatedInfo.modifiedPackages) {
+            const info = updatedInfo.allPackages[pkg];
             const { packageJsonPath, ...output } = info;
             const newLine = detectNewline_1(fs__default['default'].readFileSync(info.packageJsonPath, 'utf-8')) || os__default['default'].EOL;
             fs__default['default'].writeFileSync(info.packageJsonPath, JSON.stringify(output, null, 2).replace(/\n/g, newLine) + newLine);
