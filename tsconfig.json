@@ -1,0 +1,7 @@
+{
+  "extends": "@tsconfig/node12",
+  "include": ["src"],
+  "compilerOptions": {
+    "noImplicitAny": false
+  }
+}
