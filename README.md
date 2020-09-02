@@ -18,6 +18,74 @@ The central build script package can provide a set of shared partial package.jso
 can then declare that they inherit from those package.json partial files. This tool can then be used to make
 sure the package.json's actually respect those partial files.
 
+## Install the tool
+
+It is recommended to "install" this tool by just copying the `dist/package-inherit-cli.js` somewhere in your
+repo. This is because this is a tool that manipulates the `package.json` files and will affect the installation
+itself. You'll probably want this tool to run on `preinstall` step of the npm lifecycle (at the root):
+
+```json
+{
+  "scripts": {
+    "preinstall": "./package-inherit-cli.js update"
+  }
+}
+```
+
+## Using the tool
+
+The nature of this tool is that it should be run in one of two ways:
+
+1. as an updater
+2. as a validator
+
+## Updating package.json
+
+1. Create these files in this structure in a monorepo:
+
+```
+/
+  packages/foo/package.json
+  packages/build-tool/package.json
+  packages/build-tool/package.webpack.json
+```
+
+2. Create a partial `package.webpack.json` file:
+
+```json
+{
+  "devDependencies": {
+    "webpack": "^4.10.0",
+    "webpack-cli": "^3.1.0"
+  }
+}
+```
+
+3. Modify the `foo/package.json` to inherit from the `package.webpack.json`:
+
+```json
+{
+  "name": "foo",
+  "version": "0.1.0",
+  "inherits": ["build-tool/pacakge.webpack.json"]
+}
+```
+
+4. Run the `package-inherit-cli.js` via `npm install`
+
+```
+$ npm install
+```
+
+## Checking package.json
+
+It is highly recommended to FAIL at a PR build if the tool noticed inconsistencies. This will enforce
+the versions to be consistent by the inheritance declaration:
+
+```
+$ ./package-inherit-cli.js check
+```
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
