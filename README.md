@@ -67,7 +67,7 @@ The nature of this tool is that it should be run in one of two ways:
 {
   "name": "foo",
   "version": "0.1.0",
-  "inherits": ["build-tool/pacakge.webpack.json"]
+  "inherits": ["build-tool/package.webpack.json"]
 }
 ```
 
