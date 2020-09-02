@@ -1,3 +1,22 @@
+# Monorepo package.json inheritance
+
+## The problem
+
+In a monorepo, most of the time you would want to have your packages have their own package.json. Most of these
+repos have a central build script that help build, test, and bundle those packages. Further, these central build
+scripts usually are themselves packages. The issue here is that if you placed the devDependencies inside a central
+build package, all those build tools (and their dependencies) are "phantom dependencies". Generally you have to
+update the configurations of each build tools to accommodate the node resolutions (e.g. webpack loaders, plugins).
+
+## The solution
+
+To support a better workflow, we introduce the idea of package "inheritance". It is by no means true inheritance, 
+but it helps repo admins to centrally manage a set of devDependencies, dependencies in a central location while
+avoiding the issue of phantom dependencies.
+
+The central build script package can provide a set of shared partial package.json files. The monorepo packages
+can then declare that they inherit from those package.json partial files. This tool can then be used to make
+sure the package.json's actually respect those partial files.
 
 # Contributing
 
