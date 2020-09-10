@@ -9,11 +9,12 @@
     "release": "yarn build && yarn publish"
   },
   "dependencies": {
-    "workspace-tools": "^0.9.4",
+    "beachball": "^1.32.2",
+    "detect-newline": "^3.1.0",
     "parse-package-name": "^0.1.0",
     "tslib": "^2.0.1",
-    "yargs-parser": "^19.0.4",
-    "detect-newline": "^3.1.0"
+    "workspace-tools": "^0.9.6",
+    "yargs-parser": "^19.0.4"
   },
   "devDependencies": {
     "cross-env": "^7.0.2",

@@ -12390,6 +12390,7 @@ var __importDefault = (commonjsGlobal && commonjsGlobal.__importDefault) || func
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(path__default['default']);
+const fs_1 = __importDefault(fs__default['default']);
 function getWorkspacePackageInfo(workspacePaths) {
     if (!workspacePaths) {
         return [];
@@ -12398,7 +12399,7 @@ function getWorkspacePackageInfo(workspacePaths) {
         let packageJson;
         const packageJsonPath = path_1.default.join(workspacePath, "package.json");
         try {
-            packageJson = commonjsRequire(packageJsonPath);
+            packageJson = JSON.parse(fs_1.default.readFileSync(packageJsonPath, "utf-8"));
         }
         catch (_a) {
             return returnValue;
@@ -12484,7 +12485,7 @@ var fromPromise = function (fn) {
   }, 'name', { value: fn.name })
 };
 
-var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify = {
+var C__workspace_packageInherit_node_modules_universalify = {
 	fromCallback: fromCallback,
 	fromPromise: fromPromise
 };
@@ -12492,7 +12493,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
 var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_fsExtra_lib_fs = createCommonjsModule(function (module, exports) {
 // This is adapted from https://github.com/normalize/mz
 // Copyright (c) 2014-2016 Jonathan Ong me@jongleberry.com and Contributors
-const u = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 const api = [
@@ -13039,7 +13040,7 @@ function mkdirsSync (p, opts, made) {
 
 var mkdirsSync_1 = mkdirsSync;
 
-const u = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 const mkdirs$1 = u(mkdirs_1);
 
 
@@ -13053,7 +13054,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
   ensureDirSync: mkdirsSync_1
 };
 
-const u$1 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromPromise;
+const u$1 = C__workspace_packageInherit_node_modules_universalify.fromPromise;
 
 
 function pathExists$1 (path) {
@@ -13114,7 +13115,7 @@ function copy (src, dest, options, callback) {
 
 var copy_1 = copy;
 
-const u$2 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$2 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_fsExtra_lib_copy = {
   copy: u$2(copy_1)
 };
@@ -13538,7 +13539,7 @@ function rmkidsSync (p, options) {
 var rimraf_1 = rimraf;
 rimraf.sync = rimrafSync;
 
-const u$3 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$3 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_fsExtra_lib_remove = {
@@ -13679,17 +13680,17 @@ var jsonfile = {
   writeFileSync: writeFileSync
 };
 
-var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_jsonfile = jsonfile;
+var C__workspace_packageInherit_node_modules_jsonfile = jsonfile;
 
-const u$4 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$4 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 var jsonfile$1 = {
   // jsonfile exports
-  readJson: u$4(C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_jsonfile.readFile),
-  readJsonSync: C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_jsonfile.readFileSync,
-  writeJson: u$4(C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_jsonfile.writeFile),
-  writeJsonSync: C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_jsonfile.writeFileSync
+  readJson: u$4(C__workspace_packageInherit_node_modules_jsonfile.readFile),
+  readJsonSync: C__workspace_packageInherit_node_modules_jsonfile.readFileSync,
+  writeJson: u$4(C__workspace_packageInherit_node_modules_jsonfile.writeFile),
+  writeJsonSync: C__workspace_packageInherit_node_modules_jsonfile.writeFileSync
 };
 
 const pathExists$3 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_fsExtra_lib_pathExists.pathExists;
@@ -13728,7 +13729,7 @@ function outputJsonSync (file, data, options) {
 
 var outputJsonSync_1 = outputJsonSync;
 
-const u$5 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$5 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 jsonfile$1.outputJson = u$5(outputJson_1);
@@ -13749,7 +13750,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
 
 // this needs a cleanup
 
-const u$6 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$6 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -14027,7 +14028,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
   moveSync
 };
 
-const u$7 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$7 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -14074,7 +14075,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
   emptydir: emptyDir
 };
 
-const u$8 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$8 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -14122,7 +14123,7 @@ var file = {
   createFileSync
 };
 
-const u$9 = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$9 = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -14306,7 +14307,7 @@ var symlinkType_1 = {
   symlinkTypeSync
 };
 
-const u$a = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$a = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -14388,7 +14389,7 @@ var C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_
   ensureSymlinkSync: symlink.createSymlinkSync
 };
 
-const u$b = C__workspace_packageInherit_node_modules_findYarnWorkspaceRoot_node_modules_universalify.fromCallback;
+const u$b = C__workspace_packageInherit_node_modules_universalify.fromCallback;
 
 
 
@@ -33447,6 +33448,7 @@ var __importDefault = (commonjsGlobal && commonjsGlobal.__importDefault) || func
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(path__default['default']);
+const fs_1 = __importDefault(fs__default['default']);
 const find_yarn_workspace_root_1 = __importDefault(findYarnWorkspaceRoot);
 
 
@@ -33458,11 +33460,14 @@ function getYarnWorkspaceRoot(cwd) {
     return yarnWorkspacesRoot;
 }
 function getRootPackageJson(yarnWorkspacesRoot) {
-    const packageJson = commonjsRequire(path_1.default.join(yarnWorkspacesRoot, "package.json"));
-    if (!packageJson) {
+    const packageJsonFile = path_1.default.join(yarnWorkspacesRoot, "package.json");
+    try {
+        const packageJson = JSON.parse(fs_1.default.readFileSync(packageJsonFile, "utf-8"));
+        return packageJson;
+    }
+    catch (e) {
         throw new Error("Could not load package.json from workspaces root");
     }
-    return packageJson;
 }
 function getPackages(packageJson) {
     const { workspaces } = packageJson;
