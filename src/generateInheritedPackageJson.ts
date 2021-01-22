@@ -13,9 +13,9 @@ export function generateInheritedPackageJson(cwd: string) {
   for (const [pkg, info] of Object.entries(allPackages)) {
     // workspace-tools typings are not comprehensive about what is possible, so we force cast it
     if (info.inherits) {
-      const inheritSpecifier = (info.inherits as unknown) as InheritsInfo;
+      const inheritSpecifiers = (info.inherits as unknown) as InheritsInfo;
       let mergedInheritInfo = {};
-      for (const specifier of inheritSpecifier) {
+      for (const specifier of inheritSpecifiers) {
         const file = resolveInRepo(pkg, specifier, allPackages);
 
         if (!file) {

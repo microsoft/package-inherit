@@ -35501,9 +35501,9 @@ function generateInheritedPackageJson(cwd) {
     for (const [pkg, info] of Object.entries(allPackages)) {
         // workspace-tools typings are not comprehensive about what is possible, so we force cast it
         if (info.inherits) {
-            const inheritSpecifier = info.inherits;
+            const inheritSpecifiers = info.inherits;
             let mergedInheritInfo = {};
-            for (const specifier of inheritSpecifier) {
+            for (const specifier of inheritSpecifiers) {
                 const file = resolveInRepo(pkg, specifier, allPackages);
                 if (!file) {
                     throw new Error(`${file} does not exist`);
