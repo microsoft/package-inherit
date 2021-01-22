@@ -13,8 +13,9 @@ export function generateInheritedPackageJson(cwd: string) {
   for (const [pkg, info] of Object.entries(allPackages)) {
     // workspace-tools typings are not comprehensive about what is possible, so we force cast it
     if (info.inherits) {
-      const inheritInfo = (info.inherits as unknown) as InheritsInfo;
-      for (const specifier of inheritInfo) {
+      const inheritSpecifiers = (info.inherits as unknown) as InheritsInfo;
+      let mergedInheritInfo = {};
+      for (const specifier of inheritSpecifiers) {
         const file = resolveInRepo(pkg, specifier, allPackages);
 
         if (!file) {
@@ -23,11 +24,18 @@ export function generateInheritedPackageJson(cwd: string) {
 
         const inheritInfo = JSON.parse(fs.readFileSync(file, "utf-8"));
 
+        // Merge inherit infos for given package together before checking shouldUpdate. This will
+        // allows inherit check behavior to be symmetric with update behavior, which updates packages
+        // defined in multiple inherit files to their last occurrence.
         for (const key of keys) {
-          if (shouldUpdate(info[key], inheritInfo[key])) {
-            info[key] = { ...(info[key] as any), ...inheritInfo[key] };
-            modifiedPackages.push(pkg);
-          }
+          mergedInheritInfo[key] = { ...mergedInheritInfo[key], ...inheritInfo[key] };
+        }
+      }
+
+      for (const key of keys) {
+        if (shouldUpdate(info[key], mergedInheritInfo[key])) {
+          info[key] = { ...(info[key] as any), ...mergedInheritInfo[key] };
+          modifiedPackages.push(pkg);
         }
       }
     }
