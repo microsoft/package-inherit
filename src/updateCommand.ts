@@ -15,8 +15,10 @@ export function updateCommand(cwd: string) {
       // Sort dependencies before outputing them like package managers do
       ['dependencies', 'devDependencies'].map(function(key){
         if (output[key]) {
-          const keys = Object.keys(output[key]).sort();
-          output[key] = JSON.parse(JSON.stringify(output[key], keys));
+          output[key] = Object.keys(output[key]).sort().reduce(function(newObject, packageName) {
+            newObject[packageName] = output[key][packageName];
+            return newObject;
+          }, {});
         }
       });
       fs.writeFileSync(

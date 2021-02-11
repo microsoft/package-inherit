@@ -70,7 +70,7 @@ function shouldUpdate(mine: any, theirs: any) {
   let result = false;
 
   for (const [key, value] of Object.entries(theirs)) {
-    if (mine[key] !== value) {
+    if (!mine || mine[key] !== value) {
       result = true;
     }
   }
