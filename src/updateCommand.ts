@@ -12,7 +12,15 @@ export function updateCommand(cwd: string) {
       const { packageJsonPath, ...output } = info;
 
       const newLine = detectNewline(fs.readFileSync(info.packageJsonPath, 'utf-8')) || os.EOL;
-
+      // Sort dependencies before outputing them like package managers do
+      ['dependencies', 'devDependencies'].map(function(key){
+        if (output[key]) {
+          output[key] = Object.keys(output[key]).sort().reduce(function(newObject, packageName) {
+            newObject[packageName] = output[key][packageName];
+            return newObject;
+          }, {});
+        }
+      });
       fs.writeFileSync(
         info.packageJsonPath,
         JSON.stringify(output, null, 2).replace(/\n/g, newLine) + newLine
