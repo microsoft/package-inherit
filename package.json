@@ -13,7 +13,7 @@
     "detect-newline": "^3.1.0",
     "parse-package-name": "^0.1.0",
     "tslib": "^2.0.1",
-    "workspace-tools": "^0.9.6",
+    "workspace-tools": "^0.18.4",
     "yargs-parser": "^19.0.4"
   },
   "devDependencies": {
