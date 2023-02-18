@@ -19,7 +19,7 @@ export function generateInheritedPackageJson(cwd: string) {
         const file = resolveInRepo(pkg, specifier, allPackages);
 
         if (!file) {
-          throw new Error(`${file} does not exist`);
+          throw new Error(`file does not exist. pkg:${pkg}, specifier:${specifier}`);
         }
 
         const inheritInfo = JSON.parse(fs.readFileSync(file, "utf-8"));
